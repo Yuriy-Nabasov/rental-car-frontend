@@ -1,0 +1,75 @@
+/* src/components/Header/Header.module.css */
+.header {
+  position: relative;
+  border-bottom: 1px solid var(--badges);
+  padding: 24px 120px;
+  height: 68px;
+  background: var(--badges);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logoPartRental {
+  color: var(--main);
+}
+
+.logoPartCar {
+  color: var(--button);
+}
+
+.navList {
+  display: flex;
+  gap: 28px;
+}
+
+.navItem {
+  list-style: none;
+}
+
+.navLink {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 125%;
+  text-align: center;
+  color: var(--main);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover,
+.navLink:focus {
+  color: var(--button-hover);
+}
+
+.activeLink {
+  color: var(--button-hover);
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 125%;
+  text-align: center;
+  position: relative;
+}
