@@ -1,0 +1,15 @@
+/* src/components/ErrorMessage/ErrorMessage.module.css */
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-top: 50px;
+}
+
+.errorMessage {
+  color: red;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 500;
+}

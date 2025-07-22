@@ -1,0 +1,66 @@
+/* src/pages/CatalogPage/CatalogPage.module.css */
+.catalogPage {
+  padding-top: calc(68px + 40px);
+  padding-bottom: 40px;
+  min-height: calc(100vh - 68px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carsList {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(274px, 1fr)
+  ); /* 4 колонки по 274px, адаптивні */
+  gap: 50px 29px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 50px;
+}
+
+.loadMoreBtn {
+  display: block;
+  margin: 100px auto 0 auto;
+  border: 1px solid var(--button);
+  border-radius: 12px;
+  padding: 12px 51px;
+  height: 44px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--main);
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.loadMoreBtn:hover,
+.loadMoreBtn:focus {
+  color: var(--button-hover);
+}
+
+.loadMoreBtn:disabled {
+  color: var(--gray);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.noCarsMessage {
+  font-family: var(--font-family);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--main);
+  margin-top: 50px;
+}

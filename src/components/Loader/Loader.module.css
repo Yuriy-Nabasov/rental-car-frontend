@@ -1,0 +1,8 @@
+/* src/components/Loader/Loader.module.css */
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-top: 50px;
+}

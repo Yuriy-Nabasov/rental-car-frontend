@@ -1,0 +1,130 @@
+/* src/components/CarCard/CarCard.module.css */
+.card {
+  width: 274px;
+  height: 426px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 268px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.carImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.favoriteBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favoriteBtn svg {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
+}
+
+.favoriteBtn:hover svg,
+.favoriteBtn:focus svg {
+  color: var(--button-hover);
+}
+
+.isFavorite svg {
+  color: var(--button);
+}
+
+.infoTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--main);
+  margin: 0;
+  white-space: nowrap; /* Щоб назва не переносилася */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Додаємо три крапки, якщо текст занадто довгий */
+}
+
+.model {
+  color: var(--button);
+}
+
+.price {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--main);
+  margin: 0;
+}
+
+.infoBottom {
+  margin-bottom: 28px;
+}
+
+.detailsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--gray);
+}
+
+.detailsList li:not(:last-child) {
+  padding-right: 6px;
+  border-right: 1px solid rgba(18, 20, 23, 0.1); /* Роздільник */
+}
+.detailsList li:last-child {
+  border-right: none;
+}
+
+.learnMoreBtn {
+  width: 100%;
+  padding: 12px 0;
+  background-color: var(--button);
+  color: var(--white);
+  border-radius: 12px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.learnMoreBtn:hover,
+.learnMoreBtn:focus {
+  background-color: var(--button-hover);
+}

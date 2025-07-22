@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import { loadFavorites } from "./redux/carSlice";
+import { loadFavorites } from "./redux/favoritesSlice";
 
 import Header from "./components/Header/Header.jsx";
 
