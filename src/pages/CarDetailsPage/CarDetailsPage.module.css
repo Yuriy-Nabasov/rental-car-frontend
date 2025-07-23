@@ -1,0 +1,308 @@
+/* src/pages/CarDetailsPage/CarDetailsPage.module.css */
+
+.pageContainer {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.detailsWrapper {
+  display: flex;
+  gap: 72px;
+}
+
+.leftColumn {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.rightColumn {
+  flex-grow: 1; /* Права колонка займе доступний простір */
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Image Block --- */
+.imageBlock {
+  width: 640px;
+  height: 512px;
+  border-radius: 19px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Rental Form --- */
+.rentalForm {
+  border: 1px solid var(--gray-light);
+  border-radius: 10px;
+  padding: 32px;
+  width: 640px;
+  background-color: var(--white);
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.formTitleContainer {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.formTitle {
+  /* Book your car now */
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--main);
+  margin-bottom: 8px;
+}
+
+.formSubtitle {
+  /* Stay connected! We are always ready to help you. */
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--gray);
+  margin: 0;
+}
+
+.inputGroup {
+  margin-bottom: 14px;
+}
+
+.textInput,
+.emailInput,
+.dateInput,
+.commentInput {
+  border-radius: 12px;
+  padding: 12px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 48px;
+  background-color: var(--inputs);
+  border: 1px solid transparent;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--main);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.textInput::placeholder,
+.emailInput::placeholder,
+.dateInput::placeholder,
+.commentInput::placeholder {
+  color: var(--gray);
+}
+
+.textInput:focus,
+.emailInput:focus,
+.dateInput:focus,
+.commentInput:focus {
+  border-color: var(--button);
+}
+
+.commentInput {
+  height: 88px;
+  padding-bottom: 56px;
+  resize: vertical;
+}
+
+.submitBtn {
+  border-radius: 12px;
+  padding: 12px 51px;
+  width: 156px;
+  height: 44px;
+  background-color: var(--button);
+  color: var(--white);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 125%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 24px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+  background-color: var(--button-hover);
+}
+
+/* --- Details Block (Car Info) --- */
+.detailsBlock {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 488px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+.detailsTitleContainer {
+  margin-bottom: 20px;
+}
+
+.mainTitle {
+  /* brand model, year */
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--main);
+  margin-bottom: 4px;
+}
+
+.modelAccent {
+  color: var(--button);
+}
+
+.carIdText {
+  /* id: 11a3ab35-07b8-4336-b06b-602cdc309f2c */
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--gray);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.locationMileageContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.locationBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.locationText {
+  /* Kyiv, Ukraine */
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--main);
+  margin: 0;
+}
+
+.mileageText {
+  /* Mileage: 5 858 km */
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--main);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.rentalPriceText {
+  /* $40 */
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--button);
+  margin-bottom: 20px;
+}
+
+.description {
+  /* text 1 (description) */
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--main);
+  margin-bottom: 0;
+}
+
+/* --- Car Info Block (Accessories & Functionalities) --- */
+.carInfoBlock {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 488px;
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Загальні стилі для заголовків всіх підблоків "Car Info" */
+.carInfoSectionTitle {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--main);
+  margin-bottom: 14px;
+}
+
+/* Загальні стилі для списків всіх підблоків "Car Info" */
+.carInfoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.carInfoListItem {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 20px;
+  white-space: nowrap;
+}
+
+/* Стилі для іконки галочки в Rental Conditions */
+.checkIcon {
+  color: var(--button);
+  min-width: 16px;
+  min-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Загальні стилі для значення в "Specifications" (наприклад, "Year: 2008") */
+.carInfoValue {
+  font-weight: 500;
+  color: var(--gray);
+}

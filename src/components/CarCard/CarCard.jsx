@@ -7,6 +7,7 @@ import {
   selectFavorites,
 } from "../../redux/favoritesSlice";
 import { SlHeart, SlLike } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 import css from "./CarCard.module.css";
 
@@ -66,9 +67,9 @@ const CarCard = ({ car }) => {
           <li>{car.engineSize}</li>
         </ul>
       </div>
-      <button type="button" className={css.learnMoreBtn}>
+      <Link to={`/catalog/${car.id}`} className={css.learnMoreBtn}>
         Read more
-      </button>
+      </Link>
     </li>
   );
 };

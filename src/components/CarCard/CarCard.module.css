@@ -122,6 +122,11 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
 .learnMoreBtn:hover,
