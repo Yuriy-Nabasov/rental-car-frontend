@@ -1,12 +1,55 @@
-# React + Vite
+# Car Rental App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Про проєкт
 
-Currently, two official plugins are available:
+**Car Rental App** — це сучасний та зручний веб-додаток, розроблений для спрощення процесу пошуку та оренди автомобілів. Він пропонує інтуїтивно зрозумілий інтерфейс, широкий вибір транспортних засобів та зручні функції фільтрації, що дозволяють користувачам швидко знайти ідеальний автомобіль для своїх потреб.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Основні функції
 
-## Expanding the ESLint configuration
+- **Перегляд каталогу автомобілів**: Досліджуйте великий асортимент доступних для оренди автомобілів з детальною інформацією про кожен з них.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Фільтрація та пошук**: Ефективно шукайте автомобілі за брендом, ціною та пробігом, щоб звузити вибір.
+
+- **Додавання до обраного**: Зберігайте улюблені автомобілі для швидкого доступу до них у майбутньому.
+
+- **Детальний перегляд авто**: Отримуйте повну інформацію про кожен автомобіль, включаючи характеристики, умови оренди та опис.
+
+- **Форма бронювання**: Зручна форма для швидкого запиту на оренду обраного автомобіля.
+
+## Технології
+
+Проєкт розроблено з використанням наступних технологій:
+
+- **React**: Бібліотека для побудови користувацьких інтерфейсів.
+
+- **React Router Dom**: Для маршрутизації в односторінковому додатку (SPA).
+
+- **Redux Toolkit**: Для ефективного управління станом програми.
+
+- **Axios**: Для виконання HTTP-запитів до API.
+
+- **CSS Modules**: Для ізоляції стилів компонентів.
+
+- **React Icons**: Для зручного використання іконок.
+
+- **Vercel**: Для швидкого та легкого деплою.
+
+## Розгортання (Deployment)
+
+Проєкт налаштований для розгортання на [Vercel](https://vercel.com/).
+Для коректної роботи маршрутизації на Vercel (особливо для 404 сторінки), у корені проєкту додано файл _vercel.json_ з наступним вмістом:
+{
+"rewrites": [
+{ "source": "/(.*)", "destination": "/index.html" }
+]
+}
+
+Це гарантує, що всі запити будуть перенаправлятися на _index.html_, дозволяючи React Router Dom обробляти маршрути на стороні клієнта.
+
+## Автор
+
+Yuriy Nabasov
+
+[Посилання на LinkedIn](www.linkedin.com/in/iuriy-nabasov-b8b245308)
+
+[Посилання на GitHub](https://github.com/Yuriy-Nabasov)
