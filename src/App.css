@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.content-wrapper {
+  /* Обгортка для додавання додаткового падінгу щоб вийнятий з потоку хедер не перекривав содержимого сторінок */
+  padding-top: 68px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

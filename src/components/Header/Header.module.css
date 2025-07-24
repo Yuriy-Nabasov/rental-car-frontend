@@ -1,6 +1,12 @@
 /* src/components/Header/Header.module.css */
 .header {
-  position: relative;
+  /* position: relative; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
   border-bottom: 1px solid var(--badges);
   padding: 24px 120px;
   height: 68px;
