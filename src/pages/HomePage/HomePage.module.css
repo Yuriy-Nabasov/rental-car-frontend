@@ -1,6 +1,7 @@
 /* src/pages/HomePage/HomePage.module.css */
 .heroSection {
-  height: calc(100vh - 68px);
+  /* height: calc(100vh - 68px); */
+  min-height: 100vh;
   width: 100%;
   /* background-image: linear-gradient(
       to right,
