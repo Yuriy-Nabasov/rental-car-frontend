@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SlLocationPin } from "react-icons/sl";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import css from "./CarDetailsPage.module.css";
 
@@ -16,6 +18,78 @@ const CarDetailsPage = () => {
   const [carDetails, setCarDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    bookingDate: "",
+    comment: "",
+  });
+
+  const getMinBookingDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() + 1);
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Місяці від 0 до 11
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.bookingDate) {
+      toast.error(
+        "Please fill in all required fields (Name, Email, Booking date)."
+      );
+      return;
+    }
+
+    const selectedDate = new Date(formData.bookingDate);
+    const minAllowedDate = new Date(getMinBookingDate()); // Завтрашня дата
+
+    // Встановлюємо час на початок дня для коректного порівняння
+    selectedDate.setHours(0, 0, 0, 0);
+    minAllowedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < minAllowedDate) {
+      toast.error("Booking date must be tomorrow or later.");
+      return;
+    }
+
+    const bookingDetails = {
+      carId: carId,
+      carBrand: brand,
+      carModel: model,
+      carYear: year,
+      rentalPrice: rentalPrice,
+      ...formData,
+    };
+
+    console.log("Booking details submitted:", bookingDetails);
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      toast.success("Your rental request has been sent successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        bookingDate: "",
+        comment: "",
+      });
+    } catch (submitError) {
+      toast.error("Failed to send your rental request. Please try again.");
+      console.error("Form submission error:", submitError);
+    }
+  };
 
   useEffect(() => {
     if (!id) {
@@ -86,21 +160,20 @@ const CarDetailsPage = () => {
   } = carDetails;
 
   const addressParts = address ? address.split(", ") : [];
-  // Беремо передостанній елемент як місто, останній як країну
   const city = addressParts[addressParts.length - 2] || "N/A";
   const country = addressParts[addressParts.length - 1] || "N/A";
   const formattedMileage = mileage.toLocaleString("en-US");
 
+  const minBookingDate = getMinBookingDate();
+
   return (
     <main className={css.pageContainer}>
       <div className={css.detailsWrapper}>
-        {/* ЛІВА КОЛОНКА */}
         <div className={css.leftColumn}>
           <div className={css.imageBlock}>
             <img src={img} alt={`${brand} ${model}`} className={css.carImage} />
           </div>
 
-          {/* Форма для оренди */}
           <div className={css.rentalForm}>
             <div className={css.formTitleContainer}>
               <h2 className={css.formTitle}>Book your car now</h2>
@@ -109,7 +182,7 @@ const CarDetailsPage = () => {
               </p>
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className={css.inputGroup}>
                 <input
                   type="text"
@@ -118,6 +191,8 @@ const CarDetailsPage = () => {
                   placeholder="Name*"
                   className={css.textInput}
                   required
+                  value={formData.name}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -129,6 +204,8 @@ const CarDetailsPage = () => {
                   placeholder="Email*"
                   className={css.emailInput}
                   required
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -139,6 +216,10 @@ const CarDetailsPage = () => {
                   name="bookingDate"
                   placeholder="Booking date"
                   className={css.dateInput}
+                  required
+                  value={formData.bookingDate}
+                  onChange={handleChange}
+                  min={minBookingDate}
                 />
               </div>
 
@@ -149,6 +230,8 @@ const CarDetailsPage = () => {
                   placeholder="Comment"
                   className={css.commentInput}
                   rows="4"
+                  value={formData.comment}
+                  onChange={handleChange}
                 ></textarea>
               </div>
 
@@ -159,11 +242,8 @@ const CarDetailsPage = () => {
           </div>
         </div>
 
-        {/* ПРАВА КОЛОНКА */}
         <div className={css.rightColumn}>
-          {/* Блок з детальною інформацією (Details) */}
           <div className={css.detailsBlock}>
-            {/* 1. Title */}
             <div className={css.detailsTitleContainer}>
               <h1 className={css.mainTitle}>
                 {brand} <span className={css.modelAccent}>{model}</span>, {year}
@@ -171,7 +251,6 @@ const CarDetailsPage = () => {
               <p className={css.carIdText}>ID: {carId}</p>
             </div>
 
-            {/* 2. Details (Location, Mileage, Price) */}
             <div className={css.locationMileageContainer}>
               <div className={css.locationBlock}>
                 <SlLocationPin size={16} />
@@ -183,13 +262,10 @@ const CarDetailsPage = () => {
             </div>
             <p className={css.rentalPriceText}>${rentalPrice}</p>
 
-            {/* 3. Description (text 1) */}
             <p className={css.description}>{description}</p>
           </div>
 
-          {/* Блок з інформацією по машині (Car Info) */}
           <div className={css.carInfoBlock}>
-            {/* 1. Rental Conditions */}
             <div>
               <h2 className={css.carInfoSectionTitle}>Rental Conditions:</h2>
               <ul className={css.carInfoList}>
@@ -212,7 +288,6 @@ const CarDetailsPage = () => {
                       </li>
                     );
                   })}
-
                 <li className={css.carInfoListItem}>
                   <FaRegCheckCircle className={css.checkIcon} />
                   Mileage:{" "}
@@ -228,7 +303,6 @@ const CarDetailsPage = () => {
               </ul>
             </div>
 
-            {/* 2. Car Specifications */}
             <div>
               <h2 className={css.carInfoSectionTitle}>Car Specifications:</h2>
               <ul className={css.carInfoList}>
@@ -253,7 +327,6 @@ const CarDetailsPage = () => {
               </ul>
             </div>
 
-            {/* 3. Accessories and functionalities */}
             <div>
               <h2 className={css.carInfoSectionTitle}>
                 Accessories and functionalities:
@@ -276,6 +349,7 @@ const CarDetailsPage = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 };
