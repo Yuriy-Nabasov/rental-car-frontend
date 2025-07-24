@@ -50,6 +50,6 @@
 
 Yuriy Nabasov
 
-[Посилання на LinkedIn](www.linkedin.com/in/iuriy-nabasov-b8b245308)
+[Посилання на LinkedIn](https://www.linkedin.com/in/iuriy-nabasov-b8b245308/)
 
 [Посилання на GitHub](https://github.com/Yuriy-Nabasov)
