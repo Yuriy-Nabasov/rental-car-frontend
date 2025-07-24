@@ -6,7 +6,7 @@ import {
   removeFavorite,
   selectFavorites,
 } from "../../redux/favoritesSlice";
-import { SlHeart, SlLike } from "react-icons/sl";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import css from "./CarCard.module.css";
@@ -26,7 +26,7 @@ const CarCard = ({ car }) => {
   };
 
   const formatMileage = (mileage) => {
-    return mileage.toLocaleString("en-US");
+    return new Intl.NumberFormat("uk-UA").format(mileage);
   };
 
   const addressParts = car.address ? car.address.split(", ") : ["", "", ""];
@@ -46,7 +46,11 @@ const CarCard = ({ car }) => {
           className={`${css.favoriteBtn} ${isFavorite ? css.isFavorite : ""}`}
           onClick={toggleFavorite}
         >
-          {isFavorite ? <SlLike size={18} /> : <SlHeart size={18} />}
+          {isFavorite ? (
+            <FaHeart size={18} /> // Заповнене серце
+          ) : (
+            <FaRegHeart size={18} /> // Порожнє серце
+          )}
         </button>
       </div>
       <div className={css.infoTop}>
@@ -63,8 +67,7 @@ const CarCard = ({ car }) => {
           <li>{car.rentalCompany}</li>
           <li>{car.type}</li>
           <li>{car.make || car.brand}</li>
-          <li>{formatMileage(car.mileage)}</li>
-          <li>{car.engineSize}</li>
+          <li>{formatMileage(car.mileage)} km</li>
         </ul>
       </div>
       <Link to={`/catalog/${car.id}`} className={css.learnMoreBtn}>

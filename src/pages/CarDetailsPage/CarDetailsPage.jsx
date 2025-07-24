@@ -162,7 +162,7 @@ const CarDetailsPage = () => {
   const addressParts = address ? address.split(", ") : [];
   const city = addressParts[addressParts.length - 2] || "N/A";
   const country = addressParts[addressParts.length - 1] || "N/A";
-  const formattedMileage = mileage.toLocaleString("en-US");
+  const formattedMileage = new Intl.NumberFormat("uk-UA").format(mileage);
 
   const minBookingDate = getMinBookingDate();
 
