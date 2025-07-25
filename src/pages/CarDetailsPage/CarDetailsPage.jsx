@@ -3,7 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SlLocationPin } from "react-icons/sl";
-import { FaRegCheckCircle } from "react-icons/fa";
+import {
+  FaRegCheckCircle,
+  FaCalendarAlt,
+  FaCar,
+  FaGasPump,
+  FaCog,
+} from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -288,18 +294,6 @@ const CarDetailsPage = () => {
                       </li>
                     );
                   })}
-                <li className={css.carInfoListItem}>
-                  <FaRegCheckCircle className={css.checkIcon} />
-                  Mileage:{" "}
-                  <span className={css.carInfoValue}>
-                    {formattedMileage} km
-                  </span>
-                </li>
-                <li className={css.carInfoListItem}>
-                  <FaRegCheckCircle className={css.checkIcon} />
-                  Price:{" "}
-                  <span className={css.carInfoValue}>{rentalPrice}$</span>
-                </li>
               </ul>
             </div>
 
@@ -307,20 +301,20 @@ const CarDetailsPage = () => {
               <h2 className={css.carInfoSectionTitle}>Car Specifications:</h2>
               <ul className={css.carInfoList}>
                 <li className={css.carInfoListItem}>
-                  <FaRegCheckCircle className={css.checkIcon} />
+                  <FaCalendarAlt className={css.checkIcon} />
                   Year: <span className={css.carInfoValue}>{year}</span>
                 </li>
                 <li className={css.carInfoListItem}>
-                  <FaRegCheckCircle className={css.checkIcon} />
+                  <FaCar className={css.checkIcon} />
                   Type: <span className={css.carInfoValue}>{type}</span>
                 </li>
                 <li className={css.carInfoListItem}>
-                  <FaRegCheckCircle className={css.checkIcon} />
+                  <FaGasPump className={css.checkIcon} />
                   Fuel Consumption:{" "}
                   <span className={css.carInfoValue}>{fuelConsumption}</span>
                 </li>
                 <li className={css.carInfoListItem}>
-                  <FaRegCheckCircle className={css.checkIcon} />
+                  <FaCog className={css.checkIcon} />
                   Engine Size:{" "}
                   <span className={css.carInfoValue}>{engineSize}</span>
                 </li>

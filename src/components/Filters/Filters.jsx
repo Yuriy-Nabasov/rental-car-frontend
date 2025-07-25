@@ -145,6 +145,7 @@ const Filters = ({ onFilterChange, initialFilters }) => {
       <button type="button" onClick={handleSearch} className={css.searchBtn}>
         Search
       </button>
+      {/* Додав кнопку ресет для скидування фільтрів */}
       <button type="button" onClick={handleReset} className={css.resetBtn}>
         Reset
       </button>
