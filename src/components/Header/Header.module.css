@@ -1,6 +1,5 @@
 /* src/components/Header/Header.module.css */
 .header {
-  /* position: relative; */
   position: fixed;
   top: 0;
   left: 0;
@@ -15,7 +14,6 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  width: 100%;
 }
 
 .container {
@@ -72,10 +70,104 @@
 
 .activeLink {
   color: var(--button-hover);
-  font-family: var(--font-family);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 125%;
-  text-align: center;
   position: relative;
+}
+
+/* --- Медіа-запити для адаптації --- */
+
+/* Приховуємо кнопку-гамбургер за замовчуванням на десктопі */
+.mobileMenuToggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--main);
+  padding: 0;
+}
+
+/* Ноутбуки та великі планшети: до 1200px */
+@media screen and (max-width: 1200px) {
+  .header {
+    padding: 24px 60px;
+  }
+
+  .navList {
+    gap: 20px;
+  }
+}
+
+/* Планшети та менші екрани: до 768px */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 20px 20px;
+    height: auto;
+  }
+
+  /* Показуємо кнопку-гамбургер */
+  .mobileMenuToggle {
+    display: block;
+  }
+
+  /* Стилі для навігації на мобільних пристроях (прихована за замовчуванням) */
+  .navigation {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    background-color: var(--badges);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .navigation.mobileMenuOpen {
+    display: flex;
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+    padding: 0;
+  }
+
+  .navItem {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navLink {
+    padding: 10px 0;
+    display: block;
+  }
+
+  /* Анімація появи */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Мобільні пристрої: до 480px */
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 15px 15px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .navigation {
+    top: 55px;
+  }
 }

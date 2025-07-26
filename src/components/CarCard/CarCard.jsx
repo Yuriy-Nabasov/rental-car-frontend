@@ -26,10 +26,15 @@ const CarCard = ({ car }) => {
   };
 
   const formatMileage = (mileage) => {
-    return new Intl.NumberFormat("uk-UA").format(mileage);
+    if (mileage === null || mileage === undefined || mileage === "") {
+      return "";
+    }
+    // Використовуємо 'uk-UA' для пробілу як роздільника тисяч
+    return new Intl.NumberFormat("uk-UA").format(Number(mileage));
   };
 
   const addressParts = car.address ? car.address.split(", ") : ["", "", ""];
+
   const city = addressParts[1] || "N/A";
   const country = addressParts[2] || "N/A";
 

@@ -32,3 +32,69 @@
 .homeLink:hover {
   color: var(--button-hover);
 }
+
+/* --- Медіа-запити для адаптації NotFoundPage --- */
+
+/* Ноутбуки та великі планшети: до 1200px (для загальної консистентності) */
+@media screen and (max-width: 1200px) {
+  .notFoundContainer {
+    min-height: calc(100vh - 68px);
+    padding: 25px;
+  }
+
+  .title {
+    font-size: 3.5em;
+  }
+
+  .message {
+    font-size: 1.4em;
+  }
+
+  .homeLink {
+    font-size: 1.1em;
+  }
+}
+
+/* Планшети: до 768px */
+@media screen and (max-width: 768px) {
+  .notFoundContainer {
+    min-height: calc(100vh - 55px);
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 3em;
+    margin-bottom: 15px;
+  }
+
+  .message {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+  }
+
+  .homeLink {
+    font-size: 1em;
+  }
+}
+
+/* Мобільні пристрої: до 480px */
+@media screen and (max-width: 480px) {
+  .notFoundContainer {
+    min-height: calc(100vh - 55px);
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  .message {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+
+  .homeLink {
+    font-size: 0.9em;
+  }
+}

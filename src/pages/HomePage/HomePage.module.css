@@ -1,14 +1,7 @@
 /* src/pages/HomePage/HomePage.module.css */
 .heroSection {
-  /* height: calc(100vh - 68px); */
   min-height: 100vh;
   width: 100%;
-  /* background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ),
-    url("../../assets/hero-bg.webp"); */
   background-image: url("../../assets/hero-bg.webp");
   background-size: cover;
   background-position: center;
@@ -69,4 +62,87 @@
 .catalogButton:hover,
 .catalogButton:focus {
   background-color: var(--button-hover);
+}
+
+/* --- Медіа-запити для адаптації --- */
+
+/* Ноутбуки та великі планшети: до 1200px */
+@media screen and (max-width: 1200px) {
+  .heroSection {
+    padding-bottom: 50px;
+  }
+
+  .container {
+    width: 70%;
+    max-width: 783px;
+    padding: 0 15px;
+  }
+
+  .heroTitle {
+    font-size: 52px;
+    margin-bottom: 18px;
+  }
+
+  .heroDescription {
+    font-size: 22px;
+    margin-bottom: 35px;
+  }
+}
+
+/* Планшети: до 768px */
+@media screen and (max-width: 768px) {
+  .heroSection {
+    padding-bottom: 40px;
+  }
+
+  .container {
+    width: 85%;
+    padding: 0 10px;
+  }
+
+  .heroTitle {
+    font-size: 44px;
+    margin-bottom: 15px;
+  }
+
+  .heroDescription {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  .catalogButton {
+    padding: 12px 36px;
+    font-size: 15px;
+  }
+}
+
+/* Мобільні пристрої: до 480px */
+@media screen and (max-width: 480px) {
+  .heroSection {
+    padding-bottom: 30px;
+  }
+
+  .container {
+    width: 95%;
+    padding: 0 5px;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+    line-height: 130%;
+    margin-bottom: 10px;
+  }
+
+  .heroDescription {
+    font-size: 16px;
+    line-height: 150%;
+    margin-bottom: 20px;
+  }
+
+  .catalogButton {
+    width: 80%;
+    max-width: 250px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }

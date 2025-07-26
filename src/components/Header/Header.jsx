@@ -1,18 +1,43 @@
-// src/components/Header/Header.jsx
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 import css from "./Header.module.css";
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header className={css.header}>
       <div className={css.container}>
-        <Link to="/" className={css.logo}>
+        <Link to="/" className={css.logo} onClick={closeMobileMenu}>
           <span className={css.logoPartRental}>Rental</span>
           <span className={css.logoPartCar}>Car</span>
         </Link>
 
-        <nav className={css.navigation}>
+        {/* Кнопка-гамбургер для мобільних екранів */}
+        <button
+          type="button"
+          className={css.mobileMenuToggle}
+          onClick={toggleMobileMenu}
+          aria-expanded={isMobileMenuOpen}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </button>
+
+        {/* Навігація - буде видима на десктопі, або при відкритті мобільного меню */}
+        <nav
+          className={`${css.navigation} ${
+            isMobileMenuOpen ? css.mobileMenuOpen : ""
+          }`}
+        >
           <ul className={css.navList}>
             <li className={css.navItem}>
               <NavLink
@@ -20,6 +45,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? css.activeLink : css.navLink
                 }
+                onClick={closeMobileMenu}
               >
                 Home
               </NavLink>
@@ -30,6 +56,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? css.activeLink : css.navLink
                 }
+                onClick={closeMobileMenu}
               >
                 Catalog
               </NavLink>

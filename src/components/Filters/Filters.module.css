@@ -6,6 +6,7 @@
   align-items: flex-end;
   margin-bottom: 50px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .filterGroup {
@@ -44,8 +45,7 @@
 }
 
 .filterSelect option[value=""] {
-  /* color: var(--gray); */
-  color: var(--main);
+  color: var(--gray);
 }
 
 .filterSelect option {
@@ -55,13 +55,9 @@
   line-height: 1.25;
 }
 
-.filterSelect:not([value]) {
-  /* color: var(--gray); */
+/* Коли select має значення, його колір має бути --main */
+.filterSelect:not([value=""]) {
   color: var(--main);
-}
-
-.filterSelect[value=""] {
-  color: var(--gray);
 }
 
 .filterInput::placeholder {
@@ -130,4 +126,100 @@
 .resetBtn:hover,
 .resetBtn:focus {
   background-color: var(--grey-background-hover);
+}
+
+/* --- Медіа-запити для адаптації Filters --- */
+
+/* Ноутбуки та великі планшети: до 1200px */
+@media screen and (max-width: 1200px) {
+  .filtersWrapper {
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+
+  .filterSelect,
+  .filterInput {
+    width: 180px;
+    font-size: 16px;
+  }
+
+  .mileageMin,
+  .mileageMax {
+    width: 140px;
+  }
+
+  .searchBtn,
+  .resetBtn {
+    padding: 10px 40px;
+    font-size: 15px;
+  }
+}
+
+/* Планшети: до 768px */
+@media screen and (max-width: 768px) {
+  .filtersWrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px 10px;
+    margin-bottom: 30px;
+  }
+
+  .filterGroup {
+    width: calc(50% - 10px); /* 2 елементи в рядку (50% - половина gap) */
+    max-width: 250px;
+  }
+
+  .filterSelect,
+  .filterInput {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .mileageMin,
+  .mileageMax {
+    width: calc(50% - 1px); /* Розділяємо на дві половини, враховуючи бордер */
+  }
+
+  .searchBtn,
+  .resetBtn {
+    width: calc(50% - 10px); /* Кнопки також займають половину ширини */
+    max-width: 250px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Мобільні пристрої: до 480px */
+@media screen and (max-width: 480px) {
+  .filtersWrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .filterGroup {
+    width: 95%;
+    max-width: 300px;
+  }
+
+  .filterSelect,
+  .filterInput {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .mileageMin,
+  .mileageMax {
+    width: calc(50% - 1px);
+  }
+
+  .searchBtn,
+  .resetBtn {
+    width: 95%;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
 }

@@ -14,14 +14,12 @@
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 20px;
 }
 
 .carsList {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(274px, 1fr)
-  ); /* 4 колонки по 274px, адаптивні */
+  grid-template-columns: repeat(4, 1fr);
   gap: 50px 29px;
   list-style: none;
   padding: 0;
@@ -63,4 +61,89 @@
   font-weight: 500;
   color: var(--main);
   margin-top: 50px;
+  text-align: center;
+}
+
+/* --- Медіа-запити для адаптації CatalogPage --- */
+
+/* Ноутбуки та великі планшети: до 1200px */
+@media screen and (max-width: 1200px) {
+  .catalogPage {
+    padding-top: calc(68px + 30px);
+    padding-bottom: 30px;
+  }
+
+  .container {
+    padding: 0 30px;
+  }
+
+  .carsList {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 20px;
+    margin-top: 40px;
+  }
+
+  .loadMoreBtn {
+    margin-top: 80px;
+  }
+}
+
+/* Планшети: до 768px */
+@media screen and (max-width: 768px) {
+  .catalogPage {
+    padding-top: calc(55px + 20px);
+    padding-bottom: 20px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .carsList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 15px;
+    margin-top: 30px;
+  }
+
+  .loadMoreBtn {
+    margin-top: 60px;
+    padding: 10px 40px;
+    font-size: 15px;
+  }
+
+  .noCarsMessage {
+    font-size: 18px;
+    margin-top: 30px;
+  }
+}
+
+/* Мобільні пристрої: до 480px */
+@media screen and (max-width: 480px) {
+  .catalogPage {
+    padding-top: calc(55px + 15px);
+    padding-bottom: 15px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  .carsList {
+    grid-template-columns: 1fr;
+    gap: 20px 0;
+    margin-top: 20px;
+  }
+
+  .loadMoreBtn {
+    margin-top: 40px;
+    padding: 8px 30px;
+    font-size: 14px;
+    width: 90%;
+    max-width: 250px;
+  }
+
+  .noCarsMessage {
+    font-size: 16px;
+    margin-top: 20px;
+  }
 }

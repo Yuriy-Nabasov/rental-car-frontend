@@ -2,15 +2,16 @@
 
 .pageContainer {
   max-width: 1200px;
-  /* margin: 50px auto; */
   margin: 100px auto 50px auto;
   padding: 0 20px;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .detailsWrapper {
   display: flex;
   gap: 72px;
+  flex-wrap: nowrap;
 }
 
 .leftColumn {
@@ -18,17 +19,22 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+  flex-basis: 640px;
+  max-width: 640px;
 }
 
 .rightColumn {
-  flex-grow: 1; /* Права колонка займе доступний простір */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  flex-basis: 488px;
+  max-width: 488px;
 }
 
 /* --- Image Block --- */
 .imageBlock {
-  width: 640px;
+  width: 100%;
   height: 512px;
   border-radius: 19px;
   overflow: hidden;
@@ -46,7 +52,7 @@
   border: 1px solid var(--gray-light);
   border-radius: 10px;
   padding: 32px;
-  width: 640px;
+  width: 100%;
   background-color: var(--white);
   box-shadow: none;
   box-sizing: border-box;
@@ -58,7 +64,6 @@
 }
 
 .formTitle {
-  /* Book your car now */
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 20px;
@@ -68,7 +73,6 @@
 }
 
 .formSubtitle {
-  /* Stay connected! We are always ready to help you. */
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -152,13 +156,11 @@
   padding: 30px;
   border-radius: 14px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 488px;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
   flex-shrink: 0;
-  margin-bottom: 20px;
 }
 
 .detailsTitleContainer {
@@ -166,7 +168,6 @@
 }
 
 .mainTitle {
-  /* brand model, year */
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 24px;
@@ -180,7 +181,6 @@
 }
 
 .carIdText {
-  /* id: 11a3ab35-07b8-4336-b06b-602cdc309f2c */
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -195,6 +195,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  flex-wrap: nowrap;
+  gap: 5px 10px;
 }
 
 .locationBlock {
@@ -204,7 +206,6 @@
 }
 
 .locationText {
-  /* Kyiv, Ukraine */
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -214,7 +215,6 @@
 }
 
 .mileageText {
-  /* Mileage: 5 858 km */
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -225,7 +225,6 @@
 }
 
 .rentalPriceText {
-  /* $40 */
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 24px;
@@ -235,7 +234,6 @@
 }
 
 .description {
-  /* text 1 (description) */
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -250,7 +248,7 @@
   padding: 30px;
   border-radius: 14px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 488px;
+  width: 100%;
   box-sizing: border-box;
   flex-grow: 1;
   display: flex;
@@ -275,6 +273,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   gap: 8px;
   margin-bottom: 20px;
 }
@@ -306,4 +305,253 @@
 .carInfoValue {
   font-weight: 500;
   color: var(--gray);
+}
+
+/* --- Медіа-запити для адаптації CarDetailsPage --- */
+
+/* Ноутбуки та великі планшети: до 1200px */
+@media screen and (max-width: 1200px) {
+  .pageContainer {
+    margin: 80px auto 40px auto;
+    padding: 0 30px;
+    overflow-x: hidden;
+  }
+
+  .detailsWrapper {
+    gap: 30px;
+    flex-wrap: nowrap;
+  }
+
+  .leftColumn,
+  .rightColumn {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: none;
+    min-width: 300px;
+  }
+
+  .imageBlock {
+    height: 400px;
+  }
+
+  .rentalForm {
+    padding: 25px;
+  }
+
+  .detailsBlock,
+  .carInfoBlock {
+    padding: 25px;
+  }
+
+  .mainTitle {
+    font-size: 22px;
+  }
+
+  .carInfoSectionTitle {
+    font-size: 18px;
+  }
+
+  .carInfoListItem {
+    font-size: 15px;
+  }
+
+  .carInfoList {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+}
+
+/* Планшети: до 768px */
+@media screen and (max-width: 768px) {
+  .pageContainer {
+    margin: 60px auto 30px auto;
+    padding: 0 20px;
+    overflow-x: hidden;
+  }
+
+  .detailsWrapper {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+    max-width: 600px;
+    min-width: auto;
+  }
+
+  .imageBlock {
+    height: 300px;
+  }
+
+  .rentalForm {
+    padding: 20px;
+  }
+
+  .mainTitle {
+    font-size: 20px;
+  }
+
+  .carIdText,
+  .locationText,
+  .mileageText,
+  .description,
+  .formSubtitle,
+  .carInfoListItem {
+    font-size: 14px;
+  }
+
+  .rentalPriceText {
+    font-size: 20px;
+  }
+
+  .carInfoSectionTitle {
+    font-size: 17px;
+  }
+
+  .inputGroup {
+    margin-bottom: 10px;
+  }
+
+  .textInput,
+  .emailInput,
+  .dateInput,
+  .commentInput {
+    height: 44px;
+    padding: 10px 15px;
+    font-size: 15px;
+  }
+
+  .commentInput {
+    height: 80px;
+    padding-bottom: 50px;
+  }
+
+  .submitBtn {
+    width: 140px;
+    height: 40px;
+    font-size: 15px;
+    padding: 10px 40px;
+  }
+
+  .detailsBlock,
+  .carInfoBlock {
+    padding: 20px;
+  }
+
+  .carInfoList {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  /* Для `locationMileageContainer` на планшетах - дозволяємо переноситись, якщо необхідно */
+  .locationMileageContainer {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5px 10px;
+  }
+}
+
+/* Мобільні пристрої: до 480px */
+@media screen and (max-width: 480px) {
+  .pageContainer {
+    margin: 40px auto 20px auto;
+    padding: 0 15px;
+    overflow-x: hidden;
+  }
+
+  .detailsWrapper {
+    gap: 20px;
+  }
+
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+    max-width: none;
+  }
+
+  .imageBlock {
+    height: 220px;
+    border-radius: 12px;
+  }
+
+  .rentalForm {
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  .mainTitle {
+    font-size: 18px;
+  }
+
+  .carIdText,
+  .locationText,
+  .mileageText,
+  .description,
+  .formSubtitle,
+  .carInfoListItem {
+    font-size: 13px;
+  }
+
+  .rentalPriceText {
+    font-size: 18px;
+  }
+
+  .carInfoSectionTitle {
+    font-size: 16px;
+  }
+
+  .inputGroup {
+    margin-bottom: 8px;
+  }
+
+  .textInput,
+  .emailInput,
+  .dateInput,
+  .commentInput {
+    height: 40px;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .commentInput {
+    height: 70px;
+    padding-bottom: 40px;
+  }
+
+  .submitBtn {
+    width: 120px;
+    height: 36px;
+    font-size: 14px;
+    padding: 8px 30px;
+    margin-top: 15px;
+  }
+
+  .detailsBlock,
+  .carInfoBlock {
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  .locationMileageContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    flex-wrap: nowrap;
+  }
+
+  .carInfoList {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 5px;
+  }
+
+  .carInfoListItem {
+    white-space: normal;
+    height: auto;
+  }
 }
