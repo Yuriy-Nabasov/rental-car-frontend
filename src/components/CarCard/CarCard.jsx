@@ -61,10 +61,15 @@ const CarCard = ({ car }) => {
         <p className={css.price}>${car.rentalPrice}</p>
       </div>
       <div className={css.infoBottom}>
+        {/* ПЕРШИЙ СПИСОК */}
         <ul className={css.detailsList}>
           <li>{city}</li>
           <li>{country}</li>
           <li>{car.rentalCompany}</li>
+        </ul>
+        {/* ДРУГИЙ СПИСОК */}
+        <ul className={css.detailsList}>
+          {" "}
           <li>{car.type}</li>
           <li>{formatMileage(car.mileage)} km</li>
         </ul>
