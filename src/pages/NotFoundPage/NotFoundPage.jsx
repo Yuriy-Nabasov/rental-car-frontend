@@ -1,5 +1,4 @@
 // src/pages/NotFoundPage/NotFoundPage.jsx
-import React from "react";
 import { Link } from "react-router-dom";
 import css from "./NotFoundPage.module.css";
 

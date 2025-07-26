@@ -1,5 +1,5 @@
 // src/pages/CatalogPage/CatalogPage.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCars,

@@ -1,7 +1,7 @@
 // src/pages/CarDetailsPage/CarDetailsPage.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api.js";
 import { SlLocationPin } from "react-icons/sl";
 import {
   FaRegCheckCircle,
@@ -12,10 +12,12 @@ import {
 } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/Loader/Loader.jsx";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 
 import css from "./CarDetailsPage.module.css";
 
-const CAR_API_BASE_URL = "https://car-rental-api.goit.global/cars";
+const CAR_API_BASE_URL = "cars";
 
 const CarDetailsPage = () => {
   const { id } = useParams();
@@ -108,7 +110,7 @@ const CarDetailsPage = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`${CAR_API_BASE_URL}/${id}`);
+        const response = await api.get(`${CAR_API_BASE_URL}/${id}`);
         setCarDetails(response.data);
       } catch (err) {
         console.error("Failed to fetch car details:", err);
@@ -126,7 +128,7 @@ const CarDetailsPage = () => {
   if (isLoading) {
     return (
       <main className={css.pageContainer}>
-        <p>Loading car details...</p>
+        <Loader />
       </main>
     );
   }
@@ -134,7 +136,7 @@ const CarDetailsPage = () => {
   if (error) {
     return (
       <main className={css.pageContainer}>
-        <p>Error: {error}</p>
+        <ErrorMessage message={error} />
       </main>
     );
   }

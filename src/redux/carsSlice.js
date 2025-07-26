@@ -1,8 +1,6 @@
 // src/redux/carsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const BASE_URL = "https://car-rental-api.goit.global";
+import api from "../services/api.js";
 
 export const fetchCars = createAsyncThunk(
   "cars/fetchCars",
@@ -36,7 +34,7 @@ export const fetchCars = createAsyncThunk(
         params.append("maxMileage", mileageMax);
       }
 
-      const response = await axios.get(`${BASE_URL}/cars?${params.toString()}`);
+      const response = await api.get(`cars?${params.toString()}`);
 
       return response.data;
     } catch (error) {

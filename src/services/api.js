@@ -1,8 +1,9 @@
 // src/services/api.js
 import axios from "axios";
+import { BASE_URL } from "../constants/api.js";
 
 const instance = axios.create({
-  baseURL: "https://car-rental-api.goit.global/api/",
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

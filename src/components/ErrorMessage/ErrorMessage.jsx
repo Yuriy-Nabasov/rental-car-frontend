@@ -1,5 +1,4 @@
 // src/components/ErrorMessage/ErrorMessage.jsx
-import React from "react";
 import css from "./ErrorMessage.module.css";
 
 const ErrorMessage = ({ message }) => {

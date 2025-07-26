@@ -1,10 +1,10 @@
 // src/components/Filters/Filters.jsx
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import api from "../../services/api.js";
 import { rentalPrices } from "../../data/filterData";
 import css from "./Filters.module.css";
 
-const BRANDS_API_URL = "https://car-rental-api.goit.global/brands";
+const BRANDS_API_URL = "brands";
 
 const Filters = ({ onFilterChange, initialFilters }) => {
   const [brand, setBrand] = useState(initialFilters.brand || "");
@@ -21,7 +21,7 @@ const Filters = ({ onFilterChange, initialFilters }) => {
       setBrandsLoading(true);
       setBrandsError(null);
       try {
-        const response = await axios.get(BRANDS_API_URL);
+        const response = await api.get(BRANDS_API_URL);
         setCarBrands(response.data);
       } catch (err) {
         console.error("Failed to fetch car brands:", err);
