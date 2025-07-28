@@ -64,9 +64,9 @@
   text-align: center;
 }
 
-/* --- Медіа-запити для адаптації CatalogPage --- */
+/* --- Media queries for adaptation NotFoundPage | Медіа-запити для адаптації NotFoundPage --- */
 
-/* Ноутбуки та великі планшети: до 1200px */
+/* Laptops and large tablets: up to 1200px (for overall consistency) | Ноутбуки та великі планшети: до 1200px (для загальної консистентності) */
 @media screen and (max-width: 1200px) {
   .catalogPage {
     padding-top: calc(68px + 30px);
@@ -88,7 +88,7 @@
   }
 }
 
-/* Планшети: до 768px */
+/* Tablets: up to 768px | Планшети: до 768px */
 @media screen and (max-width: 768px) {
   .catalogPage {
     padding-top: calc(55px + 20px);
@@ -117,7 +117,7 @@
   }
 }
 
-/* Мобільні пристрої: до 480px */
+/* Mobile devices: up to 480px | Мобільні пристрої: до 480px */
 @media screen and (max-width: 480px) {
   .catalogPage {
     padding-top: calc(55px + 15px);

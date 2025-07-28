@@ -28,7 +28,7 @@ const CarCard = ({ car }) => {
     if (mileage === null || mileage === undefined || mileage === "") {
       return "";
     }
-    // Використовуємо 'uk-UA' для пробілу як роздільника тисяч
+    // We use 'uk-UA' for the space as the thousands separator | Використовуємо 'uk-UA' для пробілу як роздільника тисяч
     return new Intl.NumberFormat("uk-UA").format(Number(mileage));
   };
 
@@ -51,9 +51,9 @@ const CarCard = ({ car }) => {
           onClick={toggleFavorite}
         >
           {isFavorite ? (
-            <FaHeart size={18} /> // Заповнене серце
+            <FaHeart size={18} /> // A filled heart | Заповнене серце
           ) : (
-            <FaRegHeart size={18} /> // Порожнє серце
+            <FaRegHeart size={18} /> // Empty heart | Порожнє серце
           )}
         </button>
       </div>
@@ -65,13 +65,13 @@ const CarCard = ({ car }) => {
         <p className={css.price}>${car.rentalPrice}</p>
       </div>
       <div className={css.infoBottom}>
-        {/* ПЕРШИЙ СПИСОК */}
+        {/* FIRST LIST | ПЕРШИЙ СПИСОК */}
         <ul className={css.detailsList}>
           <li>{city}</li>
           <li>{country}</li>
           <li>{car.rentalCompany}</li>
         </ul>
-        {/* ДРУГИЙ СПИСОК */}
+        {/* SECOND LIST | ДРУГИЙ СПИСОК */}
         <ul className={css.detailsList}>
           {" "}
           <li>{car.type}</li>

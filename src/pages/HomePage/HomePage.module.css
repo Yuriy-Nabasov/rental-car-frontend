@@ -64,9 +64,9 @@
   background-color: var(--button-hover);
 }
 
-/* --- Медіа-запити для адаптації --- */
+/* --- Media queries for adaptation NotFoundPage | Медіа-запити для адаптації NotFoundPage --- */
 
-/* Ноутбуки та великі планшети: до 1200px */
+/* Laptops and large tablets: up to 1200px (for overall consistency) | Ноутбуки та великі планшети: до 1200px (для загальної консистентності) */
 @media screen and (max-width: 1200px) {
   .heroSection {
     padding-bottom: 50px;
@@ -89,7 +89,7 @@
   }
 }
 
-/* Планшети: до 768px */
+/* Tablets: up to 768px | Планшети: до 768px */
 @media screen and (max-width: 768px) {
   .heroSection {
     padding-bottom: 40px;
@@ -116,7 +116,7 @@
   }
 }
 
-/* Мобільні пристрої: до 480px */
+/* Mobile devices: up to 480px | Мобільні пристрої: до 480px */
 @media screen and (max-width: 480px) {
   .heroSection {
     padding-bottom: 30px;

@@ -1,6 +1,6 @@
 // src/data/filterData.js
 
-// Ціни оренди, з кроком в $10
+// Rental prices, in $10 increments | Ціни оренди, з кроком в $10
 export const rentalPrices = [
   "20",
   "30",

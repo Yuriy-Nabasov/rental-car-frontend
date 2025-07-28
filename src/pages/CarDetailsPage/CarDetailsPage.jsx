@@ -38,7 +38,7 @@ const CarDetailsPage = () => {
     const today = new Date();
     today.setDate(today.getDate() + 1);
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // Місяці від 0 до 11
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months 0 to 11 | Місяці від 0 до 11
     const day = String(today.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
@@ -62,9 +62,9 @@ const CarDetailsPage = () => {
     }
 
     const selectedDate = new Date(formData.bookingDate);
-    const minAllowedDate = new Date(getMinBookingDate()); // Завтрашня дата
+    const minAllowedDate = new Date(getMinBookingDate()); // Tomorrow's date | Завтрашня дата
 
-    // Встановлюємо час на початок дня для коректного порівняння
+    // Set the time to the beginning of the day for correct comparison | Встановлюємо час на початок дня для коректного порівняння
     selectedDate.setHours(0, 0, 0, 0);
     minAllowedDate.setHours(0, 0, 0, 0);
 

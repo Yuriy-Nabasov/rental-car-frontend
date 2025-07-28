@@ -256,7 +256,7 @@
   justify-content: space-between;
 }
 
-/* Загальні стилі для заголовків всіх підблоків "Car Info" */
+/* Common styles for headings of all "Car Info" sub-blocks | Загальні стилі для заголовків всіх підблоків "Car Info" */
 .carInfoSectionTitle {
   font-family: var(--font-family);
   font-weight: 600;
@@ -266,7 +266,7 @@
   margin-bottom: 14px;
 }
 
-/* Загальні стилі для списків всіх підблоків "Car Info" */
+/* Common styles for lists of all "Car Info" subblocks | Загальні стилі для списків всіх підблоків "Car Info" */
 .carInfoList {
   list-style: none;
   padding: 0;
@@ -291,7 +291,7 @@
   white-space: nowrap;
 }
 
-/* Стилі для іконки галочки в Rental Conditions */
+/* Styles for the checkmark icon in Rental Conditions | Стилі для іконки галочки в Rental Conditions */
 .checkIcon {
   color: var(--button);
   min-width: 16px;
@@ -301,15 +301,15 @@
   justify-content: center;
 }
 
-/* Загальні стилі для значення в "Specifications" (наприклад, "Year: 2008") */
+/* Common styles for values in "Specifications" (e.g. "Year: 2008") | Загальні стилі для значення в "Specifications" (наприклад, "Year: 2008") */
 .carInfoValue {
   font-weight: 500;
   color: var(--gray);
 }
 
-/* --- Медіа-запити для адаптації CarDetailsPage --- */
+/* --- Media queries for adaptation NotFoundPage | Медіа-запити для адаптації NotFoundPage --- */
 
-/* Ноутбуки та великі планшети: до 1200px */
+/* Laptops and large tablets: up to 1200px (for overall consistency) | Ноутбуки та великі планшети: до 1200px (для загальної консистентності) */
 @media screen and (max-width: 1200px) {
   .pageContainer {
     margin: 80px auto 40px auto;
@@ -362,7 +362,7 @@
   }
 }
 
-/* Планшети: до 768px */
+/* Tablets: up to 768px | Планшети: до 768px */
 @media screen and (max-width: 768px) {
   .pageContainer {
     margin: 60px auto 30px auto;
@@ -448,7 +448,7 @@
     gap: 6px;
   }
 
-  /* Для `locationMileageContainer` на планшетах - дозволяємо переноситись, якщо необхідно */
+  /* For `locationMileageContainer` on tablets - allow portability if necessary | Для `locationMileageContainer` на планшетах - дозволяємо переноситись, якщо необхідно */
   .locationMileageContainer {
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -456,7 +456,7 @@
   }
 }
 
-/* Мобільні пристрої: до 480px */
+/* Mobile devices: up to 480px | Мобільні пристрої: до 480px */
 @media screen and (max-width: 480px) {
   .pageContainer {
     margin: 40px auto 20px auto;

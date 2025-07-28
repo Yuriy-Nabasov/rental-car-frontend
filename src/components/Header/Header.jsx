@@ -21,7 +21,7 @@ const Header = () => {
           <span className={css.logoPartCar}>Car</span>
         </Link>
 
-        {/* Кнопка-гамбургер для мобільних екранів */}
+        {/* Hamburger button for mobile screens | Кнопка-гамбургер для мобільних екранів */}
         <button
           type="button"
           className={css.mobileMenuToggle}
@@ -32,7 +32,7 @@ const Header = () => {
           {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
-        {/* Навігація - буде видима на десктопі, або при відкритті мобільного меню */}
+        {/* Navigation - will be visible on desktop, or when opening the mobile menu | Навігація - буде видима на десктопі, або при відкритті мобільного меню */}
         <nav
           className={`${css.navigation} ${
             isMobileMenuOpen ? css.mobileMenuOpen : ""

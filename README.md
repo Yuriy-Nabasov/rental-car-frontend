@@ -1,45 +1,53 @@
 # Car Rental App
 
-## Про проєкт
+<div align="center">
 
-**Car Rental App** — це сучасний та зручний веб-додаток, розроблений для спрощення процесу пошуку та оренди автомобілів. Він пропонує інтуїтивно зрозумілий інтерфейс, широкий вибір транспортних засобів та зручні функції фільтрації, що дозволяють користувачам швидко знайти ідеальний автомобіль для своїх потреб.
+## 🌍 Choose language / Виберіть мову
 
-## Основні функції
+[US **English**](README.md) | [UA **Українська**](README_UKR.md)
 
-- **Перегляд каталогу автомобілів**: Досліджуйте великий асортимент доступних для оренди автомобілів з детальною інформацією про кожен з них.
+</div>
 
-- **Фільтрація та пошук**: Ефективно шукайте автомобілі за брендом, ціною та пробігом, щоб звузити вибір.
+## About the Project
 
-- **Додавання до обраного**: Зберігайте улюблені автомобілі для швидкого доступу до них у майбутньому.
+**Car Rental App** is a modern and user-friendly web application designed to simplify the process of searching for and renting cars. It offers an intuitive interface, a wide selection of vehicles, and convenient filtering features that allow users to quickly find the perfect car for their needs.
 
-- **Детальний перегляд авто**: Отримуйте повну інформацію про кожен автомобіль, включаючи характеристики, умови оренди та опис.
+## Key Features
 
-- **Форма бронювання**: Зручна форма для швидкого запиту на оренду обраного автомобіля.
+- **Browse Car Catalog**: Explore a wide range of available rental cars with detailed information about each one.
 
-- **Адаптивний дизайн**: Додаток коректно відображається на різних пристроях, від настільних комп'ютерів до мобільних телефонів.
+- **Filtering and Search**: Efficiently search for cars by brand, price, and mileage to narrow down your options.
 
-## Технології
+- **Add to Favorites**: Save your favorite cars for quick access in the future.
 
-Проєкт розроблено з використанням наступних технологій:
+- **Detailed Car View**: Get complete information about each vehicle, including specifications, rental terms, and descriptions.
 
-- **React**: Бібліотека для побудови користувацьких інтерфейсів.
+- **Booking Form**: A convenient form for quickly requesting a rental of the selected car.
 
-- **React Router Dom**: Для маршрутизації в односторінковому додатку (SPA).
+- **Responsive Design**: The app displays correctly across various devices, from desktops to mobile phones.
 
-- **Redux Toolkit**: Для ефективного управління станом програми.
+## Technologies
 
-- **Axios**: Для виконання HTTP-запитів до API.
+The project is built using the following technologies:
 
-- **CSS Modules**: Для ізоляції стилів компонентів.
+- **React**: A library for building user interfaces.
 
-- **React Icons**: Для зручного використання іконок.
+- **React Router Dom**: For routing in a single-page application (SPA).
 
-- **Vercel**: Для швидкого та легкого деплою.
+- **Redux Toolkit**: For efficient state management.
 
-## Розгортання (Deployment)
+- **Axios**: For making HTTP requests to the API.
 
-Проєкт налаштований для розгортання на [Vercel](https://vercel.com/).
-Для коректної роботи маршрутизації на Vercel (особливо для 404 сторінки), у корені проєкту додано файл _vercel.json_ з наступним вмістом:
+- **CSS Modules**: For component-level style isolation.
+
+- **React Icons**: For convenient use of icons.
+
+- **Vercel**: For fast and easy deployment.
+
+## Deployment
+
+The project is configured for deployment on [Vercel](https://vercel.com/).
+To ensure proper routing on Vercel (especially for the 404 page), a _vercel.json_ file has been added to the project root with the following content:
 
 ```json
 {
@@ -47,12 +55,12 @@
 }
 ```
 
-Це гарантує, що всі запити будуть перенаправлятися на _index.html_, дозволяючи React Router Dom обробляти маршрути на стороні клієнта.
+This ensures that all requests are redirected to _index.html_, allowing React Router Dom to handle client-side routing.
 
-## Автор
+## Author
 
 Yuriy Nabasov
 
-[Посилання на LinkedIn](https://www.linkedin.com/in/iuriy-nabasov-b8b245308/)
+[LinkedIn Profile](https://www.linkedin.com/in/iuriy-nabasov-b8b245308/)
 
-[Посилання на GitHub](https://github.com/Yuriy-Nabasov)
+[GitHub Profile](https://github.com/Yuriy-Nabasov)

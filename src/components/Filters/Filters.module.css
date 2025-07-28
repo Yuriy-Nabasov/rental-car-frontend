@@ -55,7 +55,7 @@
   line-height: 1.25;
 }
 
-/* Коли select має значення, його колір має бути --main */
+/* When select has a value, its color should be --main | Коли select має значення, його колір має бути --main */
 .filterSelect:not([value=""]) {
   color: var(--main);
 }
@@ -128,9 +128,9 @@
   background-color: var(--grey-background-hover);
 }
 
-/* --- Медіа-запити для адаптації Filters --- */
+/* --- Media queries for adaptation NotFoundPage | Медіа-запити для адаптації NotFoundPage --- */
 
-/* Ноутбуки та великі планшети: до 1200px */
+/* Laptops and large tablets: up to 1200px (for overall consistency) | Ноутбуки та великі планшети: до 1200px (для загальної консистентності) */
 @media screen and (max-width: 1200px) {
   .filtersWrapper {
     gap: 15px;
@@ -155,7 +155,7 @@
   }
 }
 
-/* Планшети: до 768px */
+/* Tablets: up to 768px | Планшети: до 768px */
 @media screen and (max-width: 768px) {
   .filtersWrapper {
     flex-direction: row;
@@ -166,7 +166,9 @@
   }
 
   .filterGroup {
-    width: calc(50% - 10px); /* 2 елементи в рядку (50% - половина gap) */
+    width: calc(
+      50% - 10px
+    ); /* 2 elements per row (50% - half gap) | 2 елементи в рядку (50% - половина gap) */
     max-width: 250px;
   }
 
@@ -178,19 +180,23 @@
 
   .mileageMin,
   .mileageMax {
-    width: calc(50% - 1px); /* Розділяємо на дві половини, враховуючи бордер */
+    width: calc(
+      50% - 1px
+    ); /* Divide into two halves, taking into account the border | Розділяємо на дві половини, враховуючи бордер */
   }
 
   .searchBtn,
   .resetBtn {
-    width: calc(50% - 10px); /* Кнопки також займають половину ширини */
+    width: calc(
+      50% - 10px
+    ); /* The buttons also take up half the width | Кнопки також займають половину ширини */
     max-width: 250px;
     padding: 10px 20px;
     font-size: 14px;
   }
 }
 
-/* Мобільні пристрої: до 480px */
+/* Mobile devices: up to 480px | Мобільні пристрої: до 480px */
 @media screen and (max-width: 480px) {
   .filtersWrapper {
     flex-direction: column;

@@ -73,9 +73,9 @@
   position: relative;
 }
 
-/* --- Медіа-запити для адаптації --- */
+/* --- Media queries for adaptation NotFoundPage | Медіа-запити для адаптації NotFoundPage --- */
 
-/* Приховуємо кнопку-гамбургер за замовчуванням на десктопі */
+/* Hide the default hamburger button on the desktop | Приховуємо кнопку-гамбургер за замовчуванням на десктопі */
 .mobileMenuToggle {
   display: none;
   background: none;
@@ -85,7 +85,7 @@
   padding: 0;
 }
 
-/* Ноутбуки та великі планшети: до 1200px */
+/* Laptops and large tablets: up to 1200px (for overall consistency) | Ноутбуки та великі планшети: до 1200px (для загальної консистентності) */
 @media screen and (max-width: 1200px) {
   .header {
     padding: 24px 60px;
@@ -96,19 +96,19 @@
   }
 }
 
-/* Планшети та менші екрани: до 768px */
+/* Tablets: up to 768px | Планшети: до 768px */
 @media screen and (max-width: 768px) {
   .header {
     padding: 20px 20px;
     height: auto;
   }
 
-  /* Показуємо кнопку-гамбургер */
+  /* Showing the hamburger button | Показуємо кнопку-гамбургер */
   .mobileMenuToggle {
     display: block;
   }
 
-  /* Стилі для навігації на мобільних пристроях (прихована за замовчуванням) */
+  /* Mobile navigation styles (hidden by default) | Стилі для навігації на мобільних пристроях (прихована за замовчуванням) */
   .navigation {
     display: none;
     flex-direction: column;
@@ -144,7 +144,7 @@
     display: block;
   }
 
-  /* Анімація появи */
+  /* Appearance animation | Анімація появи */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -157,7 +157,7 @@
   }
 }
 
-/* Мобільні пристрої: до 480px */
+/* Mobile devices: up to 480px | Мобільні пристрої: до 480px */
 @media screen and (max-width: 480px) {
   .header {
     padding: 15px 15px;
