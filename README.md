@@ -2,9 +2,7 @@
 
 <div align="center">
 
-## 🌍 Choose language / Виберіть мову
-
-[US **English**](README.md) | [UA **Українська**](README_UKR.md)
+🇬🇧 [**English**](README.md) | 🇺🇦 [**Українська**](README_UKR.md)
 
 </div>
 

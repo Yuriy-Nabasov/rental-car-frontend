@@ -1,4 +1,3 @@
-// src/pages/CarDetailsPage/CarDetailsPage.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api.js";
@@ -15,6 +14,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../components/Loader/Loader.jsx";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import css from "./CarDetailsPage.module.css";
 
 const CAR_API_BASE_URL = "cars";
@@ -30,17 +32,68 @@ const CarDetailsPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    bookingDate: "",
+    pickupDate: null,
+    dropoffDate: null,
     comment: "",
   });
 
-  const getMinBookingDate = () => {
-    const today = new Date();
-    today.setDate(today.getDate() + 1);
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months 0 to 11 | Місяці від 0 до 11
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+  const getMinDateTimeFromNow = () => {
+    const now = new Date();
+    const minTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Add 24 hours in milliseconds | Додаємо 24 години в мілісекундах
+
+    // Round to the nearest hour to avoid selecting minutes | Округляємо до найближчої години вперед, щоб уникнути вибору хвилин
+    // If the current minutes or seconds are not zero, add another hour and reset the minutes/seconds to zero. | Якщо поточні хвилини або секунди не нуль, додаємо ще одну годину і обнуляємо хвилини/секунди
+    if (
+      minTime.getMinutes() > 0 ||
+      minTime.getSeconds() > 0 ||
+      minTime.getMilliseconds() > 0
+    ) {
+      minTime.setHours(minTime.getHours() + 1);
+      minTime.setMinutes(0, 0, 0);
+    }
+    return minTime;
+  };
+
+  // Function to get minimum return date/time based on rental start date | Функція для отримання мінімальної дати/часу повернення на основі дати початку оренди
+  const getMinDropoffDateTime = (pickupDate) => {
+    if (!pickupDate) {
+      // If no start date is selected, the minimum return date is the beginning of tomorrow. | Якщо дата початку не обрана, мінімальна дата повернення - це початок завтрашнього дня
+      // or minPickupDateTimeFromNow if it is later | або minPickupDateTimeFromNow, якщо вона пізніша
+      const minStart = getMinDateTimeFromNow();
+      return minStart;
+    }
+    const date = new Date(pickupDate);
+    date.setHours(date.getHours() + 1); // Add one hour to the start date/time for the minimum duration | Додаємо одну годину до дати/часу початку для мінімальної тривалості
+    date.setMinutes(0, 0, 0); // Reset minutes/seconds to zero to round to a whole hour | Обнуляємо хвилини/секунди для округлення до цілої години
+    return date;
+  };
+
+  // Determines the minimum time for a DatePicker based on the selected date and the reference date/time | Визначає мінімальний час для DatePicker на основі обраної дати та опорної дати/часу
+  const getMinTime = (selectedDate, referenceDate) => {
+    if (
+      selectedDate &&
+      referenceDate &&
+      selectedDate.toDateString() === referenceDate.toDateString()
+    ) {
+      return referenceDate;
+    }
+    // For any other day (after referenceDate), the minimum time is 00:00 | Для будь-якого іншого дня (після referenceDate), мінімальний час - 00:00
+    const startOfDay = new Date(selectedDate || new Date()); // If selectedDate is not yet selected, we use the current one | Якщо selectedDate ще не обрана, використовуємо поточну
+    startOfDay.setHours(0, 0, 0, 0);
+    return startOfDay;
+  };
+
+  // Sets the maximum time for the DatePicker for the given selected date | Визначає максимальний час для DatePicker для заданої обраної дати
+  const getMaxTime = (selectedDate) => {
+    if (!selectedDate) {
+      // If the date is not set, return the end of the current day for the DatePicker to work correctly. | Якщо дата не встановлена, повертаємо кінець поточного дня для коректної роботи DatePicker
+      const endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59, 999);
+      return endOfDay;
+    }
+    const endOfDay = new Date(selectedDate);
+    endOfDay.setHours(23, 59, 59, 999); // Maximum time for any day is 23:59 | Максимальний час для будь-якого дня - 23:59
+    return endOfDay;
   };
 
   const handleChange = (e) => {
@@ -51,27 +104,73 @@ const CarDetailsPage = () => {
     }));
   };
 
+  const handleDateChange = (date, name) => {
+    if (name === "pickupDate") {
+      setFormData((prevData) => {
+        let newDropoffDate = prevData.dropoffDate;
+        if (date && newDropoffDate && newDropoffDate <= date) {
+          const minNewDropoff = new Date(date);
+          minNewDropoff.setHours(minNewDropoff.getHours() + 1, 0, 0, 0);
+          newDropoffDate = minNewDropoff;
+        } else if (date && !newDropoffDate) {
+          // If pickupDate is set and dropoffDate is not yet set | Якщо pickupDate встановлена, а dropoffDate ще не встановлена,
+          // set dropoff to pickupDate + 1 hour. | встановлюємо dropoff на pickupDate + 1 годину.
+          const minNewDropoff = new Date(date);
+          minNewDropoff.setHours(minNewDropoff.getHours() + 1, 0, 0, 0);
+          newDropoffDate = minNewDropoff;
+        }
+        return {
+          ...prevData,
+          pickupDate: date,
+          dropoffDate: newDropoffDate,
+        };
+      });
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: date,
+      }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.bookingDate) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.pickupDate ||
+      !formData.dropoffDate
+    ) {
       toast.error(
-        "Please fill in all required fields (Name, Email, Booking date)."
+        "Please fill in all required fields (Name, Email, Booking start date & time, and Reservation end date & time)."
       );
       return;
     }
 
-    const selectedDate = new Date(formData.bookingDate);
-    const minAllowedDate = new Date(getMinBookingDate()); // Tomorrow's date | Завтрашня дата
+    const pickupDate = formData.pickupDate;
+    const dropoffDate = formData.dropoffDate;
 
-    // Set the time to the beginning of the day for correct comparison | Встановлюємо час на початок дня для коректного порівняння
-    selectedDate.setHours(0, 0, 0, 0);
-    minAllowedDate.setHours(0, 0, 0, 0);
-
-    if (selectedDate < minAllowedDate) {
-      toast.error("Booking date must be tomorrow or later.");
+    // We check the date and time of the start of the booking relative to the current moment + 24 hours | Перевіряємо дату та час початку бронювання відносно поточного моменту + 24 години
+    const minimumAllowedPickup = getMinDateTimeFromNow();
+    if (pickupDate < minimumAllowedPickup) {
+      toast.error(
+        `Booking start date & time must be at least 24 hours from now.`
+      );
       return;
     }
+
+    // We check the rental end date and time against the start date and time (must be at least 1 hour later) | Перевіряємо дату та час закінчення оренди відносно дати та часу початку (повинно бути мінімум на 1 годину пізніше)
+    if (dropoffDate <= pickupDate) {
+      toast.error(
+        "Reservation end date & time must be at least one hour after the booking start date & time."
+      );
+      return;
+    }
+
+    // Format dates into ISO strings for sending, including time and time zone information | Форматуємо дати в ISO-рядки для відправки, що включає інформацію про час та часовий пояс
+    const formattedPickupDate = pickupDate.toISOString();
+    const formattedDropoffDate = dropoffDate.toISOString();
 
     const bookingDetails = {
       carId: carId,
@@ -79,18 +178,24 @@ const CarDetailsPage = () => {
       carModel: model,
       carYear: year,
       rentalPrice: rentalPrice,
-      ...formData,
+      name: formData.name,
+      email: formData.email,
+      pickupDate: formattedPickupDate,
+      dropoffDate: formattedDropoffDate,
+      comment: formData.comment,
     };
 
-    console.log("Booking details submitted:", bookingDetails);
+    console.log("Деталі бронювання відправлено:", bookingDetails);
 
     try {
+      // Simulate an API call | Імітуємо виклик API
       await new Promise((resolve) => setTimeout(resolve, 1500));
       toast.success("Your rental request has been sent successfully!");
       setFormData({
         name: "",
         email: "",
-        bookingDate: "",
+        pickupDate: null,
+        dropoffDate: null,
         comment: "",
       });
     } catch (submitError) {
@@ -113,7 +218,7 @@ const CarDetailsPage = () => {
         const response = await api.get(`${CAR_API_BASE_URL}/${id}`);
         setCarDetails(response.data);
       } catch (err) {
-        console.error("Failed to fetch car details:", err);
+        console.error("Не вдалося завантажити деталі автомобіля:", err);
         setError(
           "Failed to load car details. Please check the URL or try again later."
         );
@@ -170,9 +275,22 @@ const CarDetailsPage = () => {
   const addressParts = address ? address.split(", ") : [];
   const city = addressParts[addressParts.length - 2] || "N/A";
   const country = addressParts[addressParts.length - 1] || "N/A";
-  const formattedMileage = new Intl.NumberFormat("uk-UA").format(mileage);
+  const formattedMileage = new Intl.NumberFormat("en-US").format(mileage);
 
-  const minBookingDate = getMinBookingDate();
+  const minPickupDateTimeConstraint = getMinDateTimeFromNow();
+  const minPickupDate = minPickupDateTimeConstraint;
+  const minTimeForPickup = getMinTime(
+    formData.pickupDate || minPickupDateTimeConstraint,
+    minPickupDateTimeConstraint
+  );
+  const maxPickupTime = getMaxTime(formData.pickupDate || new Date());
+
+  const minDropoffDateTime = getMinDropoffDateTime(formData.pickupDate);
+  const minTimeForDropoff = getMinTime(
+    formData.dropoffDate || minDropoffDateTime,
+    minDropoffDateTime
+  );
+  const maxDropoffTime = getMaxTime(formData.dropoffDate || new Date());
 
   return (
     <main className={css.pageContainer}>
@@ -217,17 +335,47 @@ const CarDetailsPage = () => {
                 />
               </div>
 
+              {/* DatePicker for Booking Start Date & Time */}
               <div className={css.inputGroup}>
-                <input
-                  type="date"
-                  id="bookingDate"
-                  name="bookingDate"
-                  placeholder="Booking date"
+                <DatePicker
+                  id="pickupDate"
+                  name="pickupDate"
+                  selected={formData.pickupDate}
+                  onChange={(date) => handleDateChange(date, "pickupDate")}
+                  dateFormat="yyyy-MM-dd HH:00"
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={60}
+                  timeCaption="Time"
+                  placeholderText="Booking start date & time*"
+                  minDate={minPickupDate}
+                  minTime={minTimeForPickup}
+                  maxTime={maxPickupTime}
                   className={css.dateInput}
+                  inputClassName={css.dateInput}
                   required
-                  value={formData.bookingDate}
-                  onChange={handleChange}
-                  min={minBookingDate}
+                />
+              </div>
+
+              {/* DatePicker for Reservation End Date & Time */}
+              <div className={css.inputGroup}>
+                <DatePicker
+                  id="dropoffDate"
+                  name="dropoffDate"
+                  selected={formData.dropoffDate}
+                  onChange={(date) => handleDateChange(date, "dropoffDate")}
+                  dateFormat="yyyy-MM-dd HH:00"
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={60}
+                  timeCaption="Time"
+                  placeholderText="Reservation end date & time*"
+                  minDate={minDropoffDateTime}
+                  minTime={minTimeForDropoff}
+                  maxTime={maxDropoffTime}
+                  className={css.dateInput}
+                  inputClassName={css.dateInput}
+                  required
                 />
               </div>
 
