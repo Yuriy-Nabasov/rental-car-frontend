@@ -8,6 +8,8 @@ import {
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import { formatMileage } from "../../utils/formatters.js";
+
 import css from "./CarCard.module.css";
 
 const CarCard = ({ car }) => {
@@ -22,14 +24,6 @@ const CarCard = ({ car }) => {
     } else {
       dispatch(addFavorite(car));
     }
-  };
-
-  const formatMileage = (mileage) => {
-    if (mileage === null || mileage === undefined || mileage === "") {
-      return "";
-    }
-    // We use 'uk-UA' for the space as the thousands separator | Використовуємо 'uk-UA' для пробілу як роздільника тисяч
-    return new Intl.NumberFormat("uk-UA").format(Number(mileage));
   };
 
   const addressParts = car.address ? car.address.split(", ") : ["", "", ""];
@@ -73,7 +67,6 @@ const CarCard = ({ car }) => {
         </ul>
         {/* SECOND LIST | ДРУГИЙ СПИСОК */}
         <ul className={css.detailsList}>
-          {" "}
           <li>{car.type}</li>
           <li>{formatMileage(car.mileage)} km</li>
         </ul>

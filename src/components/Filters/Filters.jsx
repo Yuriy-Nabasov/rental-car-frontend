@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import api from "../../services/api.js";
 import { rentalPrices } from "../../data/filterData";
+import { formatMileage } from "../../utils/formatters.js"; // Імпортуємо функцію форматування
 import css from "./Filters.module.css";
 
 const BRANDS_API_URL = "brands";
@@ -9,8 +10,18 @@ const BRANDS_API_URL = "brands";
 const Filters = ({ onFilterChange, initialFilters }) => {
   const [brand, setBrand] = useState(initialFilters.brand || "");
   const [price, setPrice] = useState(initialFilters.price || "");
+
+  // Status for actual numeric values | Стан для фактичних числових значень
   const [mileageMin, setMileageMin] = useState(initialFilters.mileageMin || "");
   const [mileageMax, setMileageMax] = useState(initialFilters.mileageMax || "");
+
+  // Status for displayed values in input fields (formatted) | Стан для відображуваних значень у полях вводу (відформатованих)
+  const [displayMileageMin, setDisplayMileageMin] = useState(
+    initialFilters.mileageMin ? formatMileage(initialFilters.mileageMin) : ""
+  );
+  const [displayMileageMax, setDisplayMileageMax] = useState(
+    initialFilters.mileageMax ? formatMileage(initialFilters.mileageMax) : ""
+  );
 
   const [carBrands, setCarBrands] = useState([]);
   const [brandsLoading, setBrandsLoading] = useState(false);
@@ -34,11 +45,18 @@ const Filters = ({ onFilterChange, initialFilters }) => {
     fetchBrands();
   }, []);
 
+  // Updating states when initialFilters change (e.g. when resetting via route) | Оновлення станів при зміні initialFilters (наприклад, при скиданні через маршрут)
   useEffect(() => {
     setBrand(initialFilters.brand || "");
     setPrice(initialFilters.price || "");
     setMileageMin(initialFilters.mileageMin || "");
     setMileageMax(initialFilters.mileageMax || "");
+    setDisplayMileageMin(
+      initialFilters.mileageMin ? formatMileage(initialFilters.mileageMin) : ""
+    );
+    setDisplayMileageMax(
+      initialFilters.mileageMax ? formatMileage(initialFilters.mileageMax) : ""
+    );
   }, [initialFilters]);
 
   const handleSearch = () => {
@@ -56,6 +74,8 @@ const Filters = ({ onFilterChange, initialFilters }) => {
     setPrice("");
     setMileageMin("");
     setMileageMax("");
+    setDisplayMileageMin("");
+    setDisplayMileageMax("");
 
     onFilterChange({
       brand: "",
@@ -63,6 +83,29 @@ const Filters = ({ onFilterChange, initialFilters }) => {
       mileageMin: "",
       mileageMax: "",
     });
+  };
+
+  // Handler for changing the value in the field (user types) | Обробник зміни значення в полі (користувач набирає)
+  const handleMileageChange = (e, setMileage, setDisplayMileage) => {
+    const rawValue = e.target.value.replace(/\s/g, ""); // Remove spaces (if the user copied a formatted value) | Видаляємо пробіли (якщо користувач скопіював відформатоване значення)
+    const numValue = Number(rawValue);
+
+    // Updating the actual numerical status | Оновлюємо фактичний числовий стан
+    // Set to an empty string if the value is not a number or is empty after removing spaces | Встановлюємо порожній рядок, якщо значення не є числом або порожнє після видалення пробілів
+    setMileage(isNaN(numValue) || rawValue === "" ? "" : numValue);
+    // Update the displayed state with what the user entered (without formatting while typing) | Оновлюємо відображуваний стан тим, що користувач ввів (без форматування під час набору)
+    setDisplayMileage(e.target.value);
+  };
+
+  // Focus loss handler (formatting) | Обробник втрати фокусу (форматування)
+  const handleMileageBlur = (value, setDisplayMileage) => {
+    setDisplayMileage(formatMileage(value));
+  };
+
+  // Focus handler (return to a pure number) | Обробник отримання фокусу (повернення до чистого числа)
+  const handleMileageFocus = (value, setDisplayMileage) => {
+    // Show a pure number (if there is one), otherwise an empty string | Показуємо чисте число (якщо воно є), інакше порожній рядок
+    setDisplayMileage(value === "" ? "" : value.toString());
   };
 
   return (
@@ -112,7 +155,7 @@ const Filters = ({ onFilterChange, initialFilters }) => {
           <option value="">Choose a price</option>
           {rentalPrices.map((p) => (
             <option key={p} value={p}>
-              {p}
+              ${p}
             </option>
           ))}
         </select>
@@ -123,29 +166,50 @@ const Filters = ({ onFilterChange, initialFilters }) => {
           Car mileage / km
         </label>
         <div className={css.mileageInputs}>
-          <input
-            type="number"
-            id="mileage-min"
-            className={`${css.filterInput} ${css.mileageMin}`}
-            placeholder="From"
-            value={mileageMin}
-            onChange={(e) => setMileageMin(e.target.value)}
-          />
-          <input
-            type="number"
-            id="mileage-max"
-            className={`${css.filterInput} ${css.mileageMax}`}
-            placeholder="To"
-            value={mileageMax}
-            onChange={(e) => setMileageMax(e.target.value)}
-          />
+          {/* Input for "From" */}
+          <div
+            className={`${css.mileageInputContainer} ${css.mileageMinContainer}`}
+          >
+            <span className={css.mileagePrefix}>From:</span>
+            <input
+              type="text" // Changed to text to allow formatting | Змінено на text, щоб дозволити форматування
+              id="mileage-min"
+              className={css.mileageInputField}
+              value={displayMileageMin} // We use the display state to display | Використовуємо display-стан для відображення
+              onChange={(e) =>
+                handleMileageChange(e, setMileageMin, setDisplayMileageMin)
+              }
+              onBlur={() => handleMileageBlur(mileageMin, setDisplayMileageMin)}
+              onFocus={() =>
+                handleMileageFocus(mileageMin, setDisplayMileageMin)
+              }
+            />
+          </div>
+          {/* Input for "To" */}
+          <div
+            className={`${css.mileageInputContainer} ${css.mileageMaxContainer}`}
+          >
+            <span className={css.mileagePrefix}>To:</span>
+            <input
+              type="text" // Changed to text to allow formatting | Змінено на text, щоб дозволити форматування
+              id="mileage-max"
+              className={css.mileageInputField}
+              value={displayMileageMax} // We use the display state to display | Використовуємо display-стан для відображення
+              onChange={(e) =>
+                handleMileageChange(e, setMileageMax, setDisplayMileageMax)
+              }
+              onBlur={() => handleMileageBlur(mileageMax, setDisplayMileageMax)}
+              onFocus={() =>
+                handleMileageFocus(mileageMax, setDisplayMileageMax)
+              }
+            />
+          </div>
         </div>
       </div>
 
       <button type="button" onClick={handleSearch} className={css.searchBtn}>
         Search
       </button>
-      {/* Added a reset button to reset filters | Додав кнопку ресет для скидування фільтрів */}
       <button type="button" onClick={handleReset} className={css.resetBtn}>
         Reset
       </button>
