@@ -19,6 +19,14 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { registerLocale } from "react-datepicker";
+import { enUS } from "date-fns/locale";
+
+const enUSTransformed = { ...enUS };
+enUSTransformed.options = { ...enUSTransformed.options, weekStartsOn: 1 }; // 1 for Monday | 1 для понеділка
+
+registerLocale("en-monday", enUSTransformed);
+
 import { formatMileage } from "../../utils/formatters.js";
 
 import css from "./CarDetailsPage.module.css";
@@ -332,6 +340,7 @@ const CarDetailsPage = () => {
                   selected={formData.pickupDate}
                   onChange={(date) => handleDateChange(date, "pickupDate")}
                   dateFormat="yyyy-MM-dd HH:00"
+                  locale="en-monday"
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={60}
@@ -354,6 +363,7 @@ const CarDetailsPage = () => {
                   selected={formData.dropoffDate}
                   onChange={(date) => handleDateChange(date, "dropoffDate")}
                   dateFormat="yyyy-MM-dd HH:00"
+                  locale="en-monday"
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={60}
