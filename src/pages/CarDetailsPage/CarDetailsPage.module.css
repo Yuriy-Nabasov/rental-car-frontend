@@ -127,7 +127,7 @@
 
 :global(.react-datepicker__day:hover),
 :global(.react-datepicker__day--keyboard-selected) {
-  border-radius: 50%;
+  border-radius: 50% !important; /* Overriding the default style in the library | Перебиваєм стиль за замовчуванням в бібліотеці*/
 }
 
 :global(.react-datepicker__navigation-icon::before) {
